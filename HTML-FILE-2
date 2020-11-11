@@ -1,0 +1,6 @@
+{%  if data==0 %}
+<h1>NON-DIABETIC</h1>
+{%  else %}
+<h1>DIABETIC</h1>
+
+{% endif %}
