@@ -1,0 +1,28 @@
+from flask import Flask, render_template ,request
+import numpy as np
+import pickle
+model=pickle.load(open('diabetics.pk1','rb'))
+app = Flask(__name__) 
+  
+@app.route("/") 
+def index(): 
+   return render_template("diabetic.html") 
+  
+
+
+@app.route("/",methods=['POST']) 
+def home():
+    data1=int(request.form['a'])
+    data2=int(request.form['b'])
+    data3=int(request.form['c'])
+    data4=int(request.form['d'])
+    data5=int(request.form['e'])
+    data6=float(request.form['f'])
+    data7=float(request.form['g'])
+    data8=int(request.form['h'])
+    arr=np.array([[data1,data2,data3,data4,data5,data6,data7,data8]])
+    pred=model.predict(arr)
+    return render_template('pred.html',data=pred)
+
+if __name__ == '__main__': 
+   app.run() 
