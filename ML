@@ -1,0 +1,139 @@
+#ALBIN THOMAS
+
+import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd
+
+data=pd.read_csv("C:\\machine\\diabetes\\diabetes.csv")
+print(data.head(5))
+diabetes=data.loc[data['Outcome']==1]
+non_diabetes=data.loc[data['Outcome']==0]
+print("Diabetes =>  "+str(len(diabetes)))
+print("Non_Diabetes =>  "+str(len(non_diabetes)))
+
+
+
+
+x=data.drop(['Outcome'], axis = 1).values
+y=data['Outcome'].values
+print(x)
+from sklearn.model_selection import train_test_split
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2,random_state=0)
+
+
+#logistic-regression
+def logistic():
+    from sklearn import linear_model
+    #using logistic regression
+    clf=linear_model.LogisticRegression(max_iter=1000)
+    clf.fit(x_train,y_train)
+    y_predict=(clf.predict(x_test))
+    from sklearn.metrics import confusion_matrix,accuracy_score
+    print("CONFUSION MATRIX")
+    print(confusion_matrix(y_test,y_predict))
+    print("\n")
+    print("ACCURACY-LOGISTIC=",accuracy_score(y_test,y_predict)*100)
+    print("\n")
+    print("CLASSIFICATION REPORT\n")
+    from sklearn.metrics import classification_report
+    print(classification_report(y_test,y_predict))
+    from sklearn.metrics import precision_score, recall_score,f1_score
+    p= precision_score(y_test, y_predict) 
+    print("\n")
+    print("The precision is {}".format(p)) 
+    r= recall_score(y_test, y_predict) 
+    print("The recall is {}".format(r)) 
+    f1= f1_score(y_test, y_predict) 
+    print("The F1-Score is {}".format(f1)) 
+    
+    import pickle
+    pickle.dump(clf,open('diabetics.pk1','wb'))
+    
+logistic()
+
+
+#knn
+def knn():
+    from sklearn.neighbors import KNeighborsClassifier
+    clf= KNeighborsClassifier(n_neighbors = 8)
+    clf.fit(x_train,y_train)
+    y_predict=(clf.predict(x_test))
+    from sklearn.metrics import confusion_matrix,accuracy_score
+    print("CONFUSION MATRIX")
+    print(confusion_matrix(y_test,y_predict))
+    print("\n")
+    print("ACCURACY=",accuracy_score(y_test,y_predict)*100)
+    print("\n")
+    print("CLASSIFICATION REPORT\n")
+    from sklearn.metrics import classification_report
+    print(classification_report(y_test,y_predict))
+    from sklearn.metrics import precision_score, recall_score,f1_score
+    p= precision_score(y_test, y_predict) 
+    print("\n")
+    print("The precision is {}".format(p)) 
+    r= recall_score(y_test, y_predict) 
+    print("The recall is {}".format(r)) 
+    f1= f1_score(y_test, y_predict) 
+    print("The F1-Score is {}".format(f1)) 
+    
+knn()
+
+
+#svm
+def svm():
+    from sklearn.svm import SVC # "Support vector classifier"  
+    clf= SVC() 
+    clf.fit(x_train,y_train)
+    y_predict=(clf.predict(x_test))
+    from sklearn.metrics import confusion_matrix,accuracy_score
+    print("CONFUSION MATRIX")
+    print(confusion_matrix(y_test,y_predict))
+    print("\n")
+    print("ACCURACY=",accuracy_score(y_test,y_predict)*100)
+    print("\n")
+    print("CLASSIFICATION REPORT\n")
+    from sklearn.metrics import classification_report
+    print(classification_report(y_test,y_predict))
+    from sklearn.metrics import precision_score, recall_score,f1_score
+    p= precision_score(y_test, y_predict) 
+    print("\n")
+    print("The precision is {}".format(p)) 
+    r= recall_score(y_test, y_predict) 
+    print("The recall is {}".format(r)) 
+    f1= f1_score(y_test, y_predict) 
+    print("The F1-Score is {}".format(f1)) 
+    
+svm()
+
+
+#stack-classifier
+def stack_classifier():
+    from mlxtend.classifier import StackingClassifier
+    from sklearn.svm import SVC 
+    from sklearn.neighbors import KNeighborsClassifier
+    from sklearn import linear_model
+    classifier1=linear_model.LogisticRegression(max_iter=1000)
+    classifier2= SVC()
+    classifier3=KNeighborsClassifier(n_neighbors = 8)
+    clf=StackingClassifier(classifiers=[classifier1,classifier2,classifier3],meta_classifier=classifier1)
+    clf.fit(x_train,y_train)
+    y_predict=(clf.predict(x_test))
+    from sklearn.metrics import confusion_matrix,accuracy_score
+    print("CONFUSION MATRIX")
+    print(confusion_matrix(y_test,y_predict))
+    print("\n")
+    print("ACCURACY=",accuracy_score(y_test,y_predict)*100)
+    print("\n")
+    print("CLASSIFICATION REPORT\n")
+    from sklearn.metrics import classification_report
+    print(classification_report(y_test,y_predict))
+    from sklearn.metrics import precision_score, recall_score,f1_score
+    p= precision_score(y_test, y_predict) 
+    print("\n")
+    print("The precision is {}".format(p)) 
+    r= recall_score(y_test, y_predict) 
+    print("The recall is {}".format(r)) 
+    f1= f1_score(y_test, y_predict) 
+    print("The F1-Score is {}".format(f1)) 
+stack_classifier()
+
