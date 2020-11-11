@@ -1,0 +1,41 @@
+<!doctype html>
+<style>
+.button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+</style>
+<html>
+   <body>
+      <form method ="POST" >
+      <h1> <CENTER style="background-color:tomato;">DIABETIC   PREDICTION    APPLICATION</CENTER></h1>
+     </BR></BR>
+      <B>PREGNANCIES </B>
+      <input type="text" name='a'>
+      </BR></BR>
+      <B>GLUCOSE</B>
+      <input type="text" name='b'></br></br>
+      <B>BLOOD PRESSURE</B>
+      <input type="text" name='c'></br></br>
+      <B>SKIN THICKNESS</B>
+      <input type="text" name='d'></br></br>
+      <B>INSULIN</B>
+      <input type="text" name='e'></br></br>
+      <B>BMI</B>
+      <input type="text" name='f'></br></br>
+      <B>DIABETES PEDIGREE FUNCTION</B>
+      <input type="text" name='g'></br></br>
+      <B>AGE</B>
+      <input type="text" name='h'></br></br>
+      <input type="submit" value="predict" class="button">
+      </form>
+   </body>
+</html>
